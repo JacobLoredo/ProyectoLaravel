@@ -1,24 +1,22 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolsTable extends Migration
+class CreateCategoriasTable extends Migration
 {
     /**
      * Run the migrations.
-     *Create rols table
-     *id->identificador unico del rol.
-     *name->Nombre del rol.
-     *Descripcion-> Descripcion del rol
+     * id->identificador unico de la categoria.
+     * NOmbre->Nombre de la categoria.
      * @return void
      */
     public function up()
     {
-        Schema::create('rols', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Name');
-            $table->string('Descripcion');
+            $table->string('Nombre');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateRolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rols');
+        Schema::dropIfExists('categorias');
     }
 }

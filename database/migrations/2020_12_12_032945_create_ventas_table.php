@@ -1,24 +1,24 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolsTable extends Migration
+class CreateVentasTable extends Migration
 {
     /**
      * Run the migrations.
-     *Create rols table
-     *id->identificador unico del rol.
-     *name->Nombre del rol.
-     *Descripcion-> Descripcion del rol
+     *id->identificador unico de la venta confimada.
+     *Totol->Total de la venta generada.
+     *Direccion del usuario.
      * @return void
      */
     public function up()
     {
-        Schema::create('rols', function (Blueprint $table) {
+        Schema::create('ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Name');
-            $table->string('Descripcion');
+            $table->string('Total');
+            $table->string('Direccion')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateRolsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rols');
+        Schema::dropIfExists('ventas');
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
+use App\producto;
+use App\Carrito;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +26,15 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         
-        $request->user()->authorizeRoles(['user', 'admin']);
-        return view('home');
+        $request->user()->authorizeRoles(['admin']);
+        $users=User::all();
+        return view('home')->with('Usuarios',$users);
     }
+    public function destroy($id)
+    {
+        $users=User::find($id);
+        $users->destroy(array('id',$id));
+        return \redirect('/home');
+    }
+    
 }

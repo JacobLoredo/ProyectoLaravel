@@ -54,11 +54,13 @@
                                     @endif
                                 @else
                                     <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre >
+                                         
                                             {{ Auth::user()->name }}
                                         </a>
-        
+                                        
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                           
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
@@ -68,6 +70,10 @@
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                                 @csrf
                                             </form>
+                                            
+                                            @if (Auth::user()->Roles()->firstWhere('name','admin')->Name=="admin")  
+                                                <a class="dropdown-item" href="{{ route('home') }}">{{ __('Panel Administrador') }}</a>  
+                                            @endif
                                         </div>
                                     </li>
                                 @endguest
@@ -75,5 +81,41 @@
                         </div>
                     </div>
                 </nav>
+               
+                <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="6000">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel" data-slide-to="1"></li>
+                        <li data-target="#carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <a href="./">
+                                 <picture>
+                                  <img src="images\Bienvenido.jpg" class="img-fluid" alt="Responsive image"  .opacity-3>
+                                </picture>
+            
+                                <div class="carousel-caption">
+                                    <div>
+                                        <h2>Bievenido</h2>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <!-- /.carousel-inner -->
+                    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!-- /.carousel -->
+            
     </body>
 </html>

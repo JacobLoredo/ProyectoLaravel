@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -46,8 +46,8 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                        @if (Route::currentRouteName()=="login")
-                            
+
+                        @if (Route::currentRouteName()=="login")   
                         @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">Iniciar Sesion</a>
@@ -73,10 +73,12 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+                                    
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    
+                                    
                                 </div>
                             </li>
                         @endguest

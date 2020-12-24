@@ -51,10 +51,11 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{ route('producto') }}">Lista de productos</a>
+                                    <a class="nav-link" href="{{ route('producto') }}">Lista de productos</a>
                                     <a class="nav-link" href={{ route('categoria') }}>Categorias</a>
                                 </nav>
                             </div>
+                           
                             
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
@@ -69,7 +70,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Ingresaste como : ADMINISTRADOR</div>
-                        
+                       
                     </div>
                 </nav>
             </div>
@@ -84,13 +85,13 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                Usuario
+                                Lista de Categorias
                             </div>
                             
                             <div class="row">
                                 
                                 <div class="col-sm-12 col-md-12">
-                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">add_circle_outline</i> <span>Agregar Usuario</span></a>
+                                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">add_circle_outline</i> <span>Agregar Categoria</span></a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -99,48 +100,38 @@
                                         
                                         <thead>
                                             <tr>
+                                                
                                                 <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Rol</th>
-                                                <th>Descripcion</th>
-                                                <th>Acciones</th>
-                                                <th>Salary</th>
+                                                <th>Productos Asociado</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                                
                                                 <th>Nombre</th>
-                                                <th>Correo</th>
-                                                <th>Rol</th>
-                                                <th>Descripcion</th>
-                                                <th>Acciones</th>
-                                                <th>Salary</th>
+                                                <th>Productos Asociado</th>
+                                                
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            
-                        @if (!is_null($Usuarios))
-                        @foreach ($Usuarios as $U)
+                                           
+                        @if (!is_null($categoria))
+                        @foreach ($categoria as $c)
 							<tr>
-                                <td>{{$U->name}}</td>
-								<td>{{$U->email}}</td>
-                                <td> @foreach ($U->roles as $a)
-                                    @if ($U->id==$a->pivot->user_id)
-                                        {{$a->Name}}
-                                        @break;
-                                    @endif
-                                    @endforeach</td>
-                                    <td>@foreach ($U->roles as $a)
-                                        @if ($U->id==$a->pivot->user_id)
-                                            {{$a->Descripcion}}
-                                            @break;
-                                        @endif
-                                        @endforeach</td>
-								<td >
-									<a href="./EditarUser/{{$U->id}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">create</i></a>
-									<a href="./EliminarUser/{{$U->id}}" class="delete" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <td>{{$c->Nombre}}</td>
+                                <td>@foreach($c->producto as $p)
+                                    <li>
+                                            {{$p->Nombre}}
+                                    </li>
+                                @endforeach
                                 </td>
-                                <td>hola</td>
+                                
+								<td>
+									<a href="./EditarCat/{{$c->id}}" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">create</i></a>
+									<a href="./EliminarCat/{{$c->id}}" class="delete" ><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                </td>
+                                
 							</tr>
     					@endforeach
     				@endif
@@ -152,9 +143,31 @@
                         
                            
                     </div>
-                    
+                    <div id="addEmployeeModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="\categoria" method="POST"  >
+                                    @csrf
+                                    <div class="modal-header">						
+                                        <h4 class="modal-title">Agregar Categoria</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">					
+                                        <div class="form-group">
+                                            <label>Nombre de la categoria</label>
+                                            <input type="text" class="form-control" required name='Cnombre'>
+                                        </div>       
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                        <input type="submit" class="btn btn-success" value="Agregar">
+                                    </div>
+                                </form>
+                               
+                            </div>
+                        </div>
+                    </div>
                 </main>
-                
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
